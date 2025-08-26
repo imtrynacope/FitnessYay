@@ -1,0 +1,229 @@
+:root {
+  --bg-image: url('pngtree-fitness-app-tracker-rate-running-trendy-photo-picture-image_8956842.jpg');
+  --accent: #0066ee;
+  --muted: #6b7280;
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --max-width: 960px;
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html,
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #111827;
+  background: var(--bg-image) no-repeat center center fixed;
+  background-size: cover;
+  animation: bgShift 28s linear infinite alternate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+@keyframes bgShift {
+  0% {
+    background-position: 10% 20%;
+    filter: saturate(1) brightness(1);
+  }
+
+  50% {
+    background-position: 90% 80%;
+    filter: saturate(1.04) brightness(0.98);
+  }
+
+  100% {
+    background-position: 10% 20%;
+    filter: saturate(1) brightness(1);
+  }
+}
+
+
+/* container */
+.wrap {
+  width: 100%;
+  max-width: var(--max-width);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: 0 10px 40px rgba(2, 6, 23, 0.45);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  align-items: stretch;
+}
+
+/* 2-column on larger screens */
+@media (min-width: 900px) {
+  .wrap {
+    grid-template-columns: 1fr 380px;
+  }
+}
+
+.panel-left {
+  min-height: 320px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  color: white;
+  background: linear-gradient(135deg, rgba(25, 26, 27, 0.92), rgba(92, 99, 95, 0.6));
+  background-blend-mode: multiply;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.panel-left h1 {
+  margin: 0;
+  font-size: 26px;
+  color: white;
+  text-decoration:none;
+}
+
+.panel-left p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.feature-list {
+  margin-top: 6px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.panel-right {
+  background: var(--card-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+
+h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.form-sub {
+  margin: 0 0 10px 0;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 13px;
+  color: #374151;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px 12px;
+  border-radius: 9px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(0, 102, 238, 0.06)
+}
+
+.pw-wrap {
+  position: relative;
+}
+
+.pw-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--muted);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  border: 0;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--accent), #004bb5);
+  color: white;
+  box-shadow: 0 6px 16px rgba(0, 102, 238, 0.18)
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px)
+}
+
+.or-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eaeaea;
+}
+
+.links {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--muted);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px
+}
+
+.links a {
+  color: var(--muted);
+  text-decoration: none
+}

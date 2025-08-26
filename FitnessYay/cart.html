@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitnessYay - Checkout</title>
+  <link rel="stylesheet" href="cart.css">
+  <style>
+   
+  </style>
+</head>
+<body>
+  <nav>
+        <a href="index.html">Home</a>
+        <a href="product.html">Product</a>
+        <a href="wishlist.html">Wishlist</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="cart.html">Checkout</a>
+        <a href="login.html">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Checkout</h1>
+      <p class="page-subtitle">Finalize your purchase and get ready to start your fitness journey</p>
+    </div>
+
+    <div id="checkoutContent">
+      </div>
+  </div>
+
+  <div class="notification" id="notification"></div>
+
+  <h5 style="text-align: center;">© 2025 FitnessYay</h5>
+
+  <script>
+    // constants & product list unchanged from your version
+    const FREE_SHIPPING_THRESHOLD = 1499;
+    const ALL_PRODUCTS = [
+      { id: 1, name: 'Smart Fitness Tracker', price: 999.00, image: 'fitnessyay1.png' },
+      { id: 2, name: 'Pro-Level Sport Watch', price: 2199.00, image: 'fitnessyay2.png' },
+      { id: 3, name: 'Bluetooth Smart Scale', price: 599.00, image: 'fitnessyay3.png' },
+      { id: 4, name: 'Wireless Sport Earbuds', price: 349.00, image: 'fitnessyay4.png' }
+    ];
+
+    // session storage cart helpers (unchanged)
+    function getCart() {
+      const stored = sessionStorage.getItem('fitnessYayCart');
+      return stored ? JSON.parse(stored) : [];
+    }
+    function saveCart(cart) {
+      sessionStorage.setItem('fitnessYayCart', JSON.stringify(cart));
+      renderCheckout();
+    }
+
+    // notification helper
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.classList.add('show');
+      setTimeout(() => notification.classList.remove('show'), 3000);
+    }
+
+    // login helpers (uses sessionStorage flags set by login.html)
+    function isLoggedIn() {
+      return sessionStorage.getItem('fitnessYayLoggedIn') === 'true';
+    }
+
+    function requireLoginThen(fn) {
+      if (!isLoggedIn()) {
+        if (confirm('You must sign in to proceed to checkout. Go to login page?')) {
+          window.location.href = 'login.html';
+        }
+        return;
+      }
+      fn();
+    }
+
+    // renderCheckout (same as your code)
+    function renderCheckout() {
+      const cartItems = getCart();
+      const checkoutContent = document.getElementById('checkoutContent');
+
+      if (cartItems.length === 0) {
+        checkoutContent.innerHTML = `
+          <div class="empty-cart">
+            <div class="empty-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h2 class="empty-title">Your cart is empty</h2>
+            <p class="empty-description">
+              Looks like you haven't added anything to your cart yet. Browse our products and find something you love!
+            </p>
+            <a href="product.html" class="browse-btn">Browse Products</a>
+          </div>
+        `;
+        return;
+      }
+
+      const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const shippingFee = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 20;
+      const total = subtotal + shippingFee;
+      
+      const shippingMessageClass = subtotal >= FREE_SHIPPING_THRESHOLD ? 'free' : 'paid';
+      const shippingMessageText = subtotal >= FREE_SHIPPING_THRESHOLD ?
+        'You got FREE SHIPPING!' :
+        `Spend RM${(FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2)} more to get free shipping`;
+
+      const cartItemsHTML = cartItems.map(item => `
+        <div class="cart-item" data-id="${item.id}">
+          <div class="item-image">
+            <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: contain;">
+          </div>
+          <div class="item-info">
+            <h3 class="item-name">${item.name}</h3>
+            <div class="item-price">RM${(item.price * item.quantity).toFixed(2)}</div>
+          </div>
+          <div class="quantity-controls">
+            <button onclick="updateQuantity(${item.id}, -1)">-</button>
+            <span>${item.quantity}</span>
+            <button onclick="updateQuantity(${item.id}, 1)">+</button>
+          </div>
+          <button class="remove-btn" onclick="removeFromCart(${item.id})">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      `).join('');
+
+      const suggestedItemsHTML = getSuggestedItems(cartItems).map(item => `
+        <div class="suggested-item" data-id="${item.id}">
+          <img src="${item.image}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p>RM${item.price.toFixed(2)}</p>
+          <button class="add-to-cart-btn" onclick="addToCartFromSuggestion(${item.id})">Add to Cart</button>
+        </div>
+      `).join('');
+
+      checkoutContent.innerHTML = `
+        <div class="checkout-content">
+          <div class="main-content">
+            <div class="cart-summary">
+              <h2 class="summary-heading">Your Order</h2>
+              <div id="cartItemsList">${cartItemsHTML}</div>
+            </div>
+            <div class="suggestions">
+              <h2>You Might Also Like</h2>
+              <div class="suggestions-grid">
+                ${suggestedItemsHTML}
+              </div>
+            </div>
+          </div>
+          <div class="order-summary">
+            <h2 class="summary-heading">Order Summary</h2>
+            <div class="summary-item">
+              <span class="label">Subtotal</span>
+              <span class="value">RM${subtotal.toFixed(2)}</span>
+            </div>
+            <div class="summary-item">
+              <span class="label">Shipping</span>
+              <span class="value">RM${shippingFee.toFixed(2)}</span>
+            </div>
+            <div class="shipping-message-box ${shippingMessageClass}">
+              <i class="fas fa-info-circle"></i> ${shippingMessageText}
+            </div>
+            <div class="summary-total">
+              <span>Total</span>
+              <span>RM${total.toFixed(2)}</span>
+            </div>
+            <button class="checkout-btn" id="proceedPaymentBtn">Proceed to Payment</button>
+          </div>
+        </div>
+      `;
+      // wire up proceed button
+      document.getElementById('proceedPaymentBtn').addEventListener('click', function() {
+        requireLoginThen(processPayment);
+      });
+    }
+
+    function updateQuantity(itemId, change) {
+      const cart = getCart();
+      const itemToUpdate = cart.find(item => item.id === itemId);
+      
+      if (itemToUpdate) {
+        itemToUpdate.quantity += change;
+        if (itemToUpdate.quantity <= 0) {
+          removeFromCart(itemId);
+        } else {
+          saveCart(cart);
+        }
+      }
+    }
+
+    function removeFromCart(itemId) {
+      const cart = getCart();
+      const updatedCart = cart.filter(item => item.id !== itemId);
+      saveCart(updatedCart);
+      showNotification('Item removed from cart!');
+    }
+
+    function addToCartFromSuggestion(itemId) {
+      requireLoginThen(() => {
+        const cart = getCart();
+        const suggestedItem = ALL_PRODUCTS.find(item => item.id === itemId);
+        if (!suggestedItem) return;
+        const existingItem = cart.find(item => item.id === suggestedItem.id);
+        if (existingItem) existingItem.quantity++;
+        else cart.push({ id: suggestedItem.id, name: suggestedItem.name, price: suggestedItem.price, quantity: 1, image: suggestedItem.image });
+        saveCart(cart);
+        showNotification(`${suggestedItem.name} added to cart!`);
+      });
+    }
+
+    function getSuggestedItems(cart) {
+      const cartItemIds = new Set(cart.map(item => item.id));
+      return ALL_PRODUCTS.filter(product => !cartItemIds.has(product.id));
+    }
+
+    function processPayment() {
+      // final check (should be logged in because requireLoginThen called earlier)
+      if (!isLoggedIn()) {
+        alert('Please log in to complete payment.');
+        window.location.href = 'login.html';
+        return;
+      }
+      // Simulate payment processing
+      showNotification('Payment successful! Thank you for your order.');
+      saveCart([]); // Clear cart after successful checkout
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCheckout);
+  </script>
+</body>
+</html>

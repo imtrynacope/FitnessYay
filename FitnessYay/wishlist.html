@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitnessYay — Your Wishlist</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="wishlist.css">
+</head>
+
+<body>
+  <nav>
+    <div class="nav-container">
+        <a href="index.html">Home</a>
+        <a href="product.html">Product</a>
+        <a href="wishlist.html">Wishlist</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="cart.html">Checkout</a>
+        <a href="login.html">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Your Wishlist</h1>
+      <p class="page-subtitle">Keep track of the FitnessYay products you love and want to purchase later</p>
+    </div>
+
+    <div class="wishlist-stats" id="wishlistStats">
+      <div class="stat-item">
+        <span class="stat-number" id="totalItems">0</span>
+        <span class="stat-label">Items</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" id="totalValue">RM0</span>
+        <span class="stat-label">Total Value</span>
+      </div>
+    </div>
+
+    <div id="wishlistContent">
+      <div class="empty-wishlist">
+        <div class="empty-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h2 class="empty-title">Your wishlist is empty</h2>
+        <p class="empty-description">
+          Browse our premium collection of fitness wearables and add items you love to your wishlist
+        </p>
+        <a href="product.html" class="browse-btn">Browse Products</a>
+      </div>
+    </div>
+
+    <div class="wishlist-actions" id="wishlistActions" style="display: none;">
+      <button class="btn btn-primary" onclick="addAllToCart()">
+        <i class="fas fa-shopping-cart"></i> Add All to Cart
+      </button>
+      <button class="btn btn-secondary" onclick="clearWishlist()">
+        <i class="fas fa-trash"></i> Clear Wishlist
+      </button>
+      <button class="btn btn-secondary" onclick="shareWishlist()">
+        <i class="fas fa-share"></i> Share Wishlist
+      </button>
+    </div>
+  </div>
+
+  <div class="notification" id="notification"></div>
+
+  <h5 style="text-align: center;">© 2025 FitnessYay</h5>
+
+  <script>
+    // login helpers
+    function isLoggedIn() { return sessionStorage.getItem('fitnessYayLoggedIn') === 'true'; }
+    function requireLoginThen(fn) {
+      if (!isLoggedIn()) {
+        if (confirm('You must sign in to proceed. Go to login page?')) window.location.href = 'login.html';
+        return;
+      }
+      fn();
+    }
+
+    // Helper functions to get and save data from sessionStorage (unchanged)
+    function getWishlist() {
+      const stored = sessionStorage.getItem('fitnessYayWishlist');
+      return stored ? JSON.parse(stored) : [];
+    }
+    function saveWishlist(wishlist) { sessionStorage.setItem('fitnessYayWishlist', JSON.stringify(wishlist)); window.dispatchEvent(new Event('storage')); }
+    function getCart() { const stored = sessionStorage.getItem('fitnessYayCart'); return stored ? JSON.parse(stored) : []; }
+    function saveCart(cart) { sessionStorage.setItem('fitnessYayCart', JSON.stringify(cart)); window.dispatchEvent(new Event('storage')); }
+
+    let wishlistItems = getWishlist();
+
+    function renderWishlist() {
+      const wishlistContent = document.getElementById('wishlistContent');
+      const wishlistActions = document.getElementById('wishlistActions');
+      
+      if (wishlistItems.length === 0) {
+        wishlistContent.innerHTML = `
+          <div class="empty-wishlist">
+            <div class="empty-icon"><i class="fas fa-heart"></i></div>
+            <h2 class="empty-title">Your wishlist is empty</h2>
+            <p class="empty-description">Browse our premium collection of fitness wearables and add items you love to your wishlist</p>
+            <a href="product.html" class="browse-btn">Browse Products</a>
+          </div>
+        `;
+        wishlistActions.style.display = 'none';
+      } else {
+        const wishlistGrid = wishlistItems.map(item => `
+          <div class="wishlist-item" data-id="${item.id}">
+            <div class="item-image">
+              <img src="${item.image}" alt="${item.name}" style="width: 180px; height:180px; object-fit:contain;">
+              <button class="remove-btn" onclick="removeFromWishlist(${item.id})"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="item-details">
+              <h3 class="item-name">${item.name}</h3>
+              <p style="color: #86868b; font-size: 15px; margin-bottom: 8px;">Color: ${item.color}</p>
+              <div class="item-price">RM${item.priceValue.toFixed(2)}</div>
+              <div class="item-features">${item.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}</div>
+              <div class="item-actions">
+                <button class="btn btn-primary" onclick="addToCartFromWishlist(${item.id})"><i class="fas fa-shopping-cart" style="margin-right: 8px;"></i>Add to Cart</button>
+                <a href="product.html" class="btn btn-secondary"><i class="fas fa-eye" style="margin-right: 8px;"></i>View Details</a>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        wishlistContent.innerHTML = `<div class="wishlist-grid">${wishlistGrid}</div>`;
+        wishlistActions.style.display = 'flex';
+      }
+
+      updateStats();
+    }
+
+    function updateStats() {
+      const totalItems = wishlistItems.length;
+      const totalValue = wishlistItems.reduce((sum, item) => sum + item.priceValue, 0);
+      document.getElementById('totalItems').textContent = totalItems;
+      document.getElementById('totalValue').textContent = `RM${totalValue.toLocaleString('en-MY', {minimumFractionDigits: 2})}`;
+    }
+
+    function removeFromWishlist(itemId) {
+      const itemIndex = wishlistItems.findIndex(item => item.id === itemId);
+      if (itemIndex > -1) {
+        const removedItem = wishlistItems[itemIndex];
+        wishlistItems.splice(itemIndex, 1);
+        saveWishlist(wishlistItems);
+        renderWishlist();
+        showNotification(`${removedItem.name} removed from wishlist`);
+      }
+    }
+
+    // Add to cart from wishlist; require login
+    function addToCartFromWishlist(itemId) {
+      requireLoginThen(() => {
+        const cart = getCart();
+        const wishlistItem = wishlistItems.find(item => item.id === itemId);
+        if (!wishlistItem) { showNotification('Item not found in wishlist!'); return; }
+        const existingItem = cart.find(item => item.id === wishlistItem.id);
+        if (existingItem) existingItem.quantity++;
+        else cart.push({ id: wishlistItem.id, name: wishlistItem.name, price: wishlistItem.priceValue, quantity: 1, image: wishlistItem.image });
+        saveCart(cart);
+        showNotification(`${wishlistItem.name} added to cart!`);
+      });
+    }
+
+    function addAllToCart() {
+      requireLoginThen(() => {
+        if (wishlistItems.length === 0) return;
+        const cart = getCart();
+        let addedCount = 0;
+        wishlistItems.forEach(wishlistItem => {
+          const existingItem = cart.find(item => item.id === wishlistItem.id);
+          if (existingItem) existingItem.quantity++;
+          else cart.push({ id: wishlistItem.id, name: wishlistItem.name, price: wishlistItem.priceValue, quantity: 1, image: wishlistItem.image });
+          addedCount++;
+        });
+        saveCart(cart);
+        showNotification(`Added all ${addedCount} items to cart!`);
+      });
+    }
+
+    function clearWishlist() {
+      if (wishlistItems.length === 0) return;
+      if (confirm('Are you sure you want to clear your entire wishlist?')) {
+        wishlistItems = [];
+        saveWishlist(wishlistItems);
+        renderWishlist();
+        showNotification('Wishlist cleared');
+      }
+    }
+
+    function shareWishlist() {
+      if (wishlistItems.length === 0) { showNotification('Your wishlist is empty'); return; }
+      if (navigator.share) {
+        navigator.share({ title: 'My FitnessYay Wishlist', text: `Check out my wishlist of ${wishlistItems.length} FitnessYay products!`, url: window.location.href });
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => showNotification('Wishlist link copied to clipboard!'));
+      }
+    }
+
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.classList.add('show');
+      setTimeout(() => notification.classList.remove('show'), 3000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      wishlistItems = getWishlist();
+      renderWishlist();
+    });
+
+    // Listen for storage changes so product page can update wishlist/cart buttons
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'fitnessYayWishlist' || e.key === 'fitnessYayCart') {
+        wishlistItems = getWishlist();
+        renderWishlist();
+      }
+    });
+
+    // Poll occasionally in case sessionStorage was changed elsewhere
+    setInterval(() => {
+      const currentWishlist = getWishlist();
+      if (currentWishlist.length !== wishlistItems.length) {
+        wishlistItems = currentWishlist;
+        renderWishlist();
+      }
+    }, 1000);
+  </script>
+</body>
+
+</html>

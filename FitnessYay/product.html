@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitnessYay — Fitness Wearables</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="product.css">
+</head>
+
+<body>
+  <nav>
+    <div style="text-align: center;">
+      <a href="index.html">Home</a>
+      <a href="product.html">Product</a>
+      <a href="wishlist.html">Wishlist</a>
+      <a href="aboutus.html">About Us</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="cart.html">Checkout</a>
+      <a href="login.html">Logout</a>
+    </div>
+  </nav>
+
+  <main class="wrap" role="main" aria-labelledby="product-heading">
+    <h1 id="product-heading">FitnessYay Premium Wearables</h1>
+    
+      <!-- Functions Section -->
+      <section class="functions-section">
+        <h2>Advanced Health Monitoring Features</h2>
+        <p style="text-align: center; margin-bottom: 30px; font-size: 1.2rem;">
+          Our smartwatches are equipped with cutting-edge technology to track your health metrics with precision
+        </p>
+        <div class="feature-highlights">
+          <div class="feature-item">
+            <h4>❤️ Heart Rate Monitoring</h4>
+            <p>24/7 continuous tracking with medical-grade accuracy</p>
+          </div>
+          <div class="feature-item">
+            <h4>🔄 Oxygen Level Tracking</h4>
+            <p>Monitor blood oxygen saturation (SpO2) levels</p>
+          </div>
+          <div class="feature-item">
+            <h4>🔥 Calories Burned</h4>
+            <p>Accurate calorie expenditure tracking</p>
+          </div>
+          <div class="feature-item">
+            <h4>🌙 Sleep Quality Analysis</h4>
+            <p>Comprehensive sleep stage monitoring</p>
+          </div>
+          <div class="feature-item">
+            <h4>👣 Step Counting</h4>
+            <p>Precise step and distance tracking</p>
+          </div>
+          <div class="feature-item">
+            <h4>📊 Health Dashboard</h4>
+            <p>Beautiful analytics and progress tracking</p>
+          </div>
+          <div class="feature-item">
+            <h4>🧭 GPS Navigation</h4>
+            <p>Built-in GPS for route tracking</p>
+          </div>
+          <div class="feature-item">
+            <h4>🔋 Long Battery Life</h4>
+            <p>Extended battery performance</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product Showcase Section -->
+      <section class="product-showcase">
+        <h2>Our Premium Collection</h2>
+        <div class="product-grid">
+          <!-- Product 1 -->
+          <div class="product-card" data-id="1" data-name="FitnessYay Ultra Charge 5" data-price="RM1,179.95" data-price-value="1179.95" data-image="fitnessyay1.png" data-color="Titanium">
+            <div class="product-image">
+              <img src="fitnessyay1.png" alt="FitnessYay Ultra Charge 5 - Premium titanium smartwatch with sapphire display and advanced health sensors">
+            </div>
+            <div class="product-info">
+              <h3>FitnessYay Ultra Charge 5</h3>
+              <div class="product-price">RM1,179.95</div>
+              <div class="product-features">
+                <ul class="feature-list">
+                  <li><i class="fas fa-battery-full"></i> 7-day battery life</li>
+                  <li><i class="fas fa-tint"></i> 50m water resistance</li>
+                  <li><i class="fas fa-map-marker-alt"></i> Built-in GPS</li>
+                  <li><i class="fas fa-heart"></i> Heart rate monitoring</li>
+                  <li><i class="fas fa-lungs"></i> Blood oxygen tracking</li>
+                  <li><i class="fas fa-moon"></i> Sleep stage analysis</li>
+                </ul>
+              </div>
+              <div class="product-buttons">
+                <button class="buy-btn">Add to Cart</button>
+                <button class="wishlist-btn" data-features='["7-day battery", "50m water resistance", "Built-in GPS", "Heart rate monitoring", "Blood oxygen tracking", "Sleep analysis"]'><i class="fas fa-heart"></i> Wishlist</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card" data-id="2" data-name="FitnessYay Series 7" data-price="RM1,399.00" data-price-value="1399.00" data-image="fitnessyay2.png" data-color="Aluminum">
+            <div class="product-image">
+              <img src="fitnessyay2.png" alt="FitnessYay Series 7 - Sleek aluminum smartwatch with always-on display and fitness tracking">
+            </div>
+            <div class="product-info">
+              <h3>FitnessYay Series 7</h3>
+              <div class="product-price">RM1,399.00</div>
+              <div class="product-features">
+                <ul class="feature-list">
+                  <li><i class="fas fa-battery-full"></i> 18-hour battery life</li>
+                  <li><i class="fas fa-tint"></i> 50m water resistance</li>
+                  <li><i class="fas fa-map-marker-alt"></i> Dual-frequency GPS</li>
+                  <li><i class="fas fa-heart"></i> ECG app capability</li>
+                  <li><i class="fas fa-lungs"></i> SpO2 monitoring</li>
+                  <li><i class="fas fa-bolt"></i> Fast charging</li>
+                </ul>
+              </div>
+              <div class="product-buttons">
+                <button class="buy-btn">Add to Cart</button>
+                <button class="wishlist-btn" data-features='["18-hour battery", "50m water resistance", "Dual-frequency GPS", "ECG capability", "SpO2 monitoring", "Fast charging"]'><i class="fas fa-heart"></i> Wishlist</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card" data-id="3" data-name="FitnessYay Series 6" data-price="RM1,399.99" data-price-value="1399.99" data-image="fitnessyay3.png" data-color="Rose Gold">
+            <div class="product-image">
+              <img src="fitnessyay3.png" alt="FitnessYay Series 6 - Advanced health monitoring smartwatch with retina display">
+            </div>
+            <div class="product-info">
+              <h3>FitnessYay Series 6</h3>
+              <div class="product-price">RM1,399.99</div>
+              <div class="product-features">
+                <ul class="feature-list">
+                  <li><i class="fas fa-battery-full"></i> 11-day battery life</li>
+                  <li><i class="fas fa-tint"></i> 50m water resistance</li>
+                  <li><i class="fas fa-map-marker-alt"></i> Standard GPS</li>
+                  <li><i class="fas fa-heart"></i> Continuous heart rate</li>
+                  <li><i class="fas fa-lungs"></i> Oxygen saturation</li>
+                  <li><i class="fas fa-bed"></i> Sleep score</li>
+                </ul>
+              </div>
+              <div class="product-buttons">
+                <button class="buy-btn">Add to Cart</button>
+                <button class="wishlist-btn" data-features='["11-day battery", "50m water resistance", "Standard GPS", "Continuous heart rate", "Oxygen saturation", "Sleep score"]'><i class="fas fa-heart"></i> Wishlist</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card" data-id="4" data-name="FitnessYay Ultra Charge 4" data-price="RM1,344.99" data-price-value="1344.99" data-image="fitnessyay4.png" data-color="Space Gray">
+            <div class="product-image">
+              <img src="fitnessyay4.png" alt="FitnessYay Ultra Charge 4 - Long-lasting fitness tracker with basic health monitoring">
+            </div>
+            <div class="product-info">
+              <h3>FitnessYay Ultra Charge 4</h3>
+              <div class="product-price">RM1,344.99</div>
+              <div class="product-features">
+                <ul class="feature-list">
+                  <li><i class="fas fa-battery-full"></i> 14-day battery life</li>
+                  <li><i class="fas fa-tint"></i> 50m water resistance</li>
+                  <li><i class="fas fa-map-marker-alt"></i> Connected GPS</li>
+                  <li><i class="fas fa-heart"></i> Basic heart rate</li>
+                  <li><i class="fas fa-walking"></i> Step counting</li>
+                  <li><i class="fas fa-clock"></i> Sleep tracking</li>
+                </ul>
+              </div>
+              <div class="product-buttons">
+                <button class="buy-btn">Add to Cart</button>
+                <button class="wishlist-btn" data-features='["14-day battery", "50m water resistance", "Connected GPS", "Basic heart rate", "Step counting", "Sleep tracking"]'><i class="fas fa-heart"></i> Wishlist</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+     <!-- Comparison Section -->
+      <h1>Compare Products</h1>
+      <div class="product-selection">
+        <select id="product1" class="product-dropdown">
+          <option value="FitnessYay1">FitnessYay Ultra Charge 5</option>
+          <option value="FitnessYay2">FitnessYay Series 7</option>
+          <option value="FitnessYay3">FitnessYay Series 6</option>
+          <option value="FitnessYay4">FitnessYay Ultra Charge 4</option>
+        </select>
+
+        <select id="product2" class="product-dropdown">
+          <option value="FitnessYay2">FitnessYay Series 7</option>
+          <option value="FitnessYay1">FitnessYay Ultra Charge 5</option>
+          <option value="FitnessYay3">FitnessYay Series 6</option>
+          <option value="FitnessYay4">FitnessYay Ultra Charge 4</option>
+        </select>
+      </div>
+
+      <button id="compareBtn" class="btn btn-primary">Compare Products</button>
+    </section>
+
+    <section id="comparisonResults" class="comparison-results">
+      <div class="product-card" id="productCard1">
+        <img id="product1Image" src="logo.png" alt="Product 1 Image">
+        <h3 id="product1Name"></h3>
+        <p>Heart Rate Monitoring <span id="hrProduct1"></span></p>
+        <p>Battery Life <span id="batteryProduct1"></span></p>
+        <p>Water Resistance <span id="waterProduct1"></span></p>
+        <p>GPS Tracking <span id="gpsProduct1"></span></p>
+        <p>Price <span id="priceProduct1"></span></p>
+      </div>
+
+      <div class="product-card" id="productCard2">
+        <img id="product2Image" src="logo.png" alt="Product 2 Image">
+        <h3 id="product2Name"></h3>
+        <p>Heart Rate Monitoring <span id="hrProduct2"></span></p>
+        <p>Battery Life <span id="batteryProduct2"></span></p>
+        <p>Water Resistance <span id="waterProduct2"></span></p>
+        <p>GPS Tracking <span id="gpsProduct2"></span></p>
+        <p>Price <span id="priceProduct2"></span></p>
+      </div>
+    </section>
+
+    <table class="comparison-table" id="comparisonTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th id="product1NameHeader"></th>
+          <th id="product2NameHeader"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Heart Rate Monitoring</td>
+          <td id="hrProduct1Table"></td>
+          <td id="hrProduct2Table"></td>
+        </tr>
+        <tr>
+          <td>Battery Life</td>
+          <td id="batteryProduct1Table"></td>
+          <td id="batteryProduct2Table"></td>
+        </tr>
+        <tr>
+          <td>Water Resistance</td>
+          <td id="waterProduct1Table"></td>
+          <td id="waterProduct2Table"></td>
+        </tr>
+        <tr>
+          <td>GPS Tracking</td>
+          <td id="gpsProduct1Table"></td>
+          <td id="gpsProduct2Table"></td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td id="priceProduct1Table"></td>
+          <td id="priceProduct2Table"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="app-introduction">
+      <h2>Introducing the FitnessYay App</h2>
+      <div class="app-content">
+        <div class="app-description">
+          <p>
+            The FitnessYay App seamlessly connects with your FitnessYay watch, providing real-time health metrics, workout tracking, and personalized fitness plans. Monitor your heart rate, track daily activities, and set ambitious fitness goals with our intuitive interface.
+          </p>
+          <p>
+            Get insights into your sleep patterns, hydration levels, and overall wellness journey. Our advanced analytics help you understand your body better and achieve your fitness aspirations faster than ever before.
+          </p>
+          <a href="path/to/your/app-download-link" class="btn" download>Download App</a>
+          <a href="app.html" class="learn-more">Learn More →</a>
+        </div>
+        <div class="app-image">
+          <img src="app1.png" alt="FitnessYay App Interface" />
+        </div>
+      </div>
+    </section>
+    <h5 style="text-align: center;">© 2025 FitnessYay</h5>
+  </main>
+
+  <div class="notification" id="notification"></div>
+
+  <script>
+    // Replace your existing JavaScript section with this fixed version
+    // small helpers for login state
+    function isLoggedIn() {
+      return sessionStorage.getItem('fitnessYayLoggedIn') === 'true';
+    }
+
+    function requireLoginThen(actionFn) {
+      if (!isLoggedIn()) {
+        if (confirm('You must be signed in to do that. Go to login page?')) {
+          window.location.href = 'login.html';
+        }
+        return;
+      }
+      actionFn();
+    }
+
+    // Fetch product data from API on page load
+    $(document).ready(function () {
+      $.getJSON('/api/productapi', function (products) {
+        window.products = {}; // store fetched data globally
+
+        // Convert array to object keyed by product IDs (FitnessYay1, FitnessYay2, etc.)
+        products.forEach((p, i) => {
+          window.products[`FitnessYay${p.id}`] = p;
+        });
+      });
+    });
+
+    // Product comparison functionality
+    $("#compareBtn").click(function () {
+      const product1 = $("#product1").val();
+      const product2 = $("#product2").val();
+
+      if (product1 === product2) {
+        alert("Please select two different products to compare.");
+        return;
+      }
+
+      // Add loading state
+      $(this).addClass('loading').text('Comparing...');
+
+      setTimeout(() => {
+        // Update product names
+        $("#product1Name").text(products[product1].name);
+        $("#product2Name").text(products[product2].name);
+        $("#product1NameHeader").text(products[product1].name);
+        $("#product2NameHeader").text(products[product2].name);
+
+        // Update product details
+        $("#hrProduct1, #hrProduct1Table").text(products[product1].hr);
+        $("#hrProduct2, #hrProduct2Table").text(products[product2].hr);
+        $("#batteryProduct1, #batteryProduct1Table").text(products[product1].battery);
+        $("#batteryProduct2, #batteryProduct2Table").text(products[product2].battery);
+        $("#waterProduct1, #waterProduct1Table").text(products[product1].waterResistance);
+        $("#waterProduct2, #waterProduct2Table").text(products[product2].waterResistance);
+        $("#gpsProduct1, #gpsProduct1Table").text(products[product1].gps);
+        $("#gpsProduct2, #gpsProduct2Table").text(products[product2].gps);
+        $("#priceProduct1, #priceProduct1Table").text(products[product1].price);
+        $("#priceProduct2, #priceProduct2Table").text(products[product2].price);
+
+        // Populate table
+        $("#hrProduct1Table").text(products[product1].hr);
+        $("#hrProduct2Table").text(products[product2].hr);
+        $("#batteryProduct1Table").text(products[product1].battery);
+        $("#batteryProduct2Table").text(products[product2].battery);
+        $("#waterProduct1Table").text(products[product1].waterResistance);
+        $("#waterProduct2Table").text(products[product2].waterResistance);
+        $("#gpsProduct1Table").text(products[product1].gps);
+        $("#gpsProduct2Table").text(products[product2].gps);
+        $("#priceProduct1Table").text(products[product1].price);
+        $("#priceProduct2Table").text(products[product2].price);
+
+        // Update product images
+        $("#product1Image").attr("src", products[product1].image);
+        $("#product2Image").attr("src", products[product2].image);
+
+        // Show comparison results with animation
+        $("#comparisonResults").addClass('fade-in').css('display', 'grid');
+        $("#comparisonTable").addClass('fade-in').show();
+
+        // Reset button
+        $(this).removeClass('loading').text('Compare Products');
+
+        // Smooth scroll to results
+        $('html, body').animate({
+          scrollTop: $("#comparisonResults").offset().top - 100
+        }, 500);
+      }, 800);
+    });
+
+    // Prevent selecting the same product
+    $("#product1, #product2").on('change', function() {
+      const selectedValue = $(this).val();
+      const otherId = $(this).attr('id') === 'product1' ? '#product2' : '#product1';
+      
+      if ($(otherId).val() === selectedValue) {
+        // Find the first different option
+        const options = $(otherId + ' option').not('[value="' + selectedValue + '"]');
+        if (options.length > 0) {
+          $(otherId).val(options.first().val());
+        }
+      }
+    });
+
+// notification helper
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.classList.add('show');
+      setTimeout(() => notification.classList.remove('show'), 3000);
+    }
+
+    // wishlist & cart storage helpers (sessionStorage)
+    function getWishlist() {
+      const stored = sessionStorage.getItem('fitnessYayWishlist');
+      return stored ? JSON.parse(stored) : [];
+    }
+    function saveWishlist(wlist) { sessionStorage.setItem('fitnessYayWishlist', JSON.stringify(wlist)); window.dispatchEvent(new Event('storage')); }
+    function getCart() {
+      const stored = sessionStorage.getItem('fitnessYayCart');
+      return stored ? JSON.parse(stored) : [];
+    }
+    function saveCart(cart) { sessionStorage.setItem('fitnessYayCart', JSON.stringify(cart)); window.dispatchEvent(new Event('storage')); }
+
+    // Add to wishlist (requires login)
+    function addToWishlistFromCard(productCard) {
+      requireLoginThen(() => {
+        const wishlist = getWishlist();
+        const productId = parseInt(productCard.getAttribute('data-id'));
+        if (wishlist.some(it => it.id === productId)) {
+          showNotification('Item already in wishlist');
+          return;
+        }
+        const wishlistItem = {
+          id: productId,
+          name: productCard.getAttribute('data-name'),
+          priceValue: parseFloat(productCard.getAttribute('data-price-value') || productCard.getAttribute('data-price')?.replace(/[^\d.]/g, '') || 0),
+          image: productCard.getAttribute('data-image'),
+          color: productCard.getAttribute('data-color'),
+          features: JSON.parse(productCard.querySelector('.wishlist-btn').getAttribute('data-features'))
+        };
+        wishlist.push(wishlistItem);
+        saveWishlist(wishlist);
+        // update UI
+        const btn = productCard.querySelector('.wishlist-btn');
+        btn.innerHTML = '<i class="fas fa-check"></i> Added';
+        btn.classList.add('added');
+        showNotification(`${wishlistItem.name} added to wishlist!`);
+      });
+    }
+
+    // Add to cart (requires login)
+    function addToCartFromCard(productCard) {
+      requireLoginThen(() => {
+        const cart = getCart();
+        const productId = parseInt(productCard.getAttribute('data-id'));
+        const existingItem = cart.find(item => item.id === productId);
+        if (existingItem) {
+          existingItem.quantity++;
+        } else {
+          cart.push({
+            id: productId,
+            name: productCard.getAttribute('data-name'),
+            price: parseFloat(productCard.getAttribute('data-price-value') || productCard.getAttribute('data-price')?.replace(/[^\d.]/g, '') || 0),
+            quantity: 1,
+            image: productCard.getAttribute('data-image')
+          });
+        }
+        saveCart(cart);
+        showNotification(`${productCard.getAttribute('data-name')} added to cart!`);
+      });
+    }
+
+    // Wire up buttons after DOM load (keeps your markup unchanged)
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.buy-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const productCard = this.closest('.product-card');
+          addToCartFromCard(productCard);
+        });
+      });
+
+      document.querySelectorAll('.wishlist-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const productCard = this.closest('.product-card');
+          addToWishlistFromCard(productCard);
+        });
+      });
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitnessYay - Feedback</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    
+       <a href="index.html"><header><strong>FitnessYay</strong></header></a>
+   
+
+    <main>
+        <form class="feedback-form">
+            <h1><strong>Send Us Your Feedback</strong> </h1>
+
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Your email" required>
+
+            <label for="type">Feedback Type</label>
+            <select id="type" name="type" required>
+                <option value="">Select...</option>
+                <option value="general">General Feedback</option>
+                <option value="bug">Report a Bug</option>
+                <option value="feature">Feature Request</option>
+            </select>
+
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" placeholder="Write your feedback here..." required></textarea>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </main>
+
+    <footer>
+        &copy; 2025 FitnessYay. All rights reserved.
+    </footer>
+    <script>
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        // Function to get a cookie
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Prefill form if cookies exist
+        window.onload = function () {
+            const savedName = getCookie("username");
+            const savedEmail = getCookie("useremail");
+
+            if (savedName) document.getElementById("name").value = savedName;
+            if (savedEmail) document.getElementById("email").value = savedEmail;
+        }
+
+        // Save cookies on form submit
+        document.getElementById("feedback-form").addEventListener("submit", function (e) {
+            e.preventDefault(); // prevent actual form submit (for demo)
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+
+            // Save to cookies for 7 days
+            setCookie("username", name, 7);
+            setCookie("useremail", email, 7);
+
+            alert("Thank you for your feedback, " + name + "! Your details are saved.");
+        });
+    </script>
+
+</body>
+
+</html>
