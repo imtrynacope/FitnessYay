@@ -1,0 +1,185 @@
+:root {
+    --bg-image: url('pngtree-fitness-app-tracker-rate-running-trendy-photo-picture-image_8956842.jpg');
+    /* same background for all */
+    --accent: #0066ee;
+    --muted: #6b7280;
+    --card-bg: rgba(255, 255, 255, 0.92);
+    --max-width: 960px;
+    --radius: 12px;
+}
+
+/* Reset / base */
+* {
+    box-sizing: border-box;
+}
+
+html,
+
+body {
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: #111827;
+    background: var(--bg-image) no-repeat center center fixed;
+    background-size: cover;
+    animation: bgShift 28s linear infinite alternate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+}
+
+
+/* Background animation */
+@keyframes bgShift {
+    0% {
+        background-position: 10% 20%;
+        filter: saturate(1) brightness(1);
+    }
+
+    50% {
+        background-position: 90% 80%;
+        filter: saturate(1.04) brightness(0.98);
+    }
+
+    100% {
+        background-position: 10% 20%;
+        filter: saturate(1) brightness(1);
+    }
+}
+
+/* Page wrapper (center content) */
+.wrap, .container, .feedback-form {
+    margin: auto;
+}
+
+
+/* 2-column on larger screens */
+@media (min-width: 900px) {
+    .wrap {
+        grid-template-columns: 1fr 380px;
+    }
+}
+
+/* left marketing panel */
+.panel-left {
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    color: white;
+    background: linear-gradient(135deg, rgba(25, 26, 27, 0.92), rgba(92, 99, 95, 0.6));
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+/* right content/form panel */
+.panel-right {
+    padding: 28px;
+    background: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 320px;
+    z-index: 3;
+}
+
+
+/* links / small text */
+.back-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* responsive adjust */
+@media (max-width: 899px) {
+    .panel-left {
+        display: none;
+    }
+
+    .wrap {
+        border-radius: 12px;
+    }
+
+    .panel-right {
+        padding: 20px;
+    }
+}
+
+/* General Reset */
+
+header {
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+main {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+}
+
+.container a {
+    color: #eef5f9;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.container a:hover {
+    text-decoration: none;
+}
+
+footer {
+    text-align: center;
+    padding: 12px;
+    font-size: 1.0 rem;
+}
+
+.feedback-form {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.feedback-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.feedback-form label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.feedback-form input,
+.feedback-form textarea,
+.feedback-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.feedback-form textarea {
+    resize: vertical;
+    height: 120px;
+}

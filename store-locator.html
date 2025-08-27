@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitnessYay - Store Locator</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="store-locater.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat"></i> FitnessYay
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="product.html">Products</a>
+                <a href="announcements.html">Announcements</a>
+                <a href="store-locator.html" class="active">Store Locator</a>
+                <a href="feedback.html">Feedback</a>
+                <a href="blog.html">Blog</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="community.html">Community</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="wishlist.html"><i class="fas fa-heart"></i></a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <a href="login.html" class="cta">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Find a FitnessYay Store</h1>
+        <p>Visit our stores to experience our products firsthand and get expert advice from our staff</p>
+    </section>
+
+    <!-- Store Locator Section -->
+    <section class="store-locator">
+        <div class="locator-container">
+            <!-- Store List -->
+            <div class="store-list">
+                <h2>Our Stores</h2>
+
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="store-search" placeholder="Search by city or location...">
+                </div>
+
+                <div class="stores-container" id="stores-container">
+                    <!-- Stores will be loaded here by API -->
+                    <p>Stores will be listed here after loading data</p>
+                </div>
+            </div>
+
+            <!-- Map Container -->
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+        </div>
+
+        <!-- API Controls -->
+        <div class="api-controls">
+            <select id="api-select">
+                <option value="stores">Load Stores Data</option>
+                <option value="users">Load User Data (Demo)</option>
+            </select>
+            <button id="fetch-btn">
+                <i class="fas fa-download"></i> Fetch Data from API
+            </button>
+            <button id="clear-btn">
+                <i class="fas fa-trash"></i> Clear Map
+            </button>
+        </div>
+
+        <!-- Response Info -->
+        <div class="response-info">
+            <h3>API Response Information</h3>
+            <pre id="api-response">// API response will appear here</pre>
+        </div>
+
+        <!-- Loading -->
+        <div class="loading" id="loading">
+            <i class="fas fa-spinner"></i>
+            <p>Fetching data from API...</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>FitnessYay</h3>
+                <p>Advanced fitness technology designed to help you understand your body and optimize your performance.
+                </p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Products</h3>
+                <ul>
+                    <li><a href="product.html">Smartwatches</a></li>
+                    <li><a href="app.html">Mobile App</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 FitnessYay. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function isLoggedIn() {
+            return sessionStorage.getItem('fitnessYayLoggedIn') === 'true';
+        }
+
+        function updateLoginButton() {
+            const loginBtn = document.querySelector('.nav-actions .cta');
+            if (!loginBtn) return;
+
+            if (isLoggedIn()) {
+                loginBtn.textContent = "Logout";
+                loginBtn.href = "#"; // prevent redirect
+                loginBtn.onclick = function (e) {
+                    e.preventDefault();
+                    sessionStorage.removeItem('fitnessYayLoggedIn');
+                    alert("You have been logged out.");
+                    window.location.reload(); // reload to update nav
+                };
+            } else {
+                loginBtn.textContent = "Login";
+                loginBtn.href = "login.html";
+                loginBtn.onclick = null;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", updateLoginButton);
+        // Initialize the map
+        const map = L.map('map').setView([4.2105, 108.9758], 6); // Center on Malaysia
+
+        // Add tile layer (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Custom icon for markers
+        const storeIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        const userIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        // Store data 
+        const stores = [
+            {
+                id: 1,
+                name: "FitnessYay Kuala Lumpur",
+                address: "TRX Mall, Level 3, Lot 25, Tun Razak Exchange, 55188 Kuala Lumpur",
+                hours: "Mon-Sat: 10AM-9PM | Sun: 11AM-7PM",
+                phone: "+03-2386 5888",
+                lat: 3.1412,
+                lng: 101.6865
+            },
+            {
+                id: 2,
+                name: "FitnessYay Penang",
+                address: "Gurney Plaza, Level 2, Lot 170, Persiaran Gurney, 10250 George Town",
+                hours: "Mon-Sat: 10AM-9PM | Sun: 11AM-7PM",
+                phone: "+04-229 9888",
+                lat: 5.4380,
+                lng: 100.3106
+            },
+            {
+                id: 3,
+                name: "FitnessYay Ipoh",
+                address: "Ipoh Parade, Level 1, Lot 105, Jalan Sultan Abdul Jalil, 31350 Ipoh",
+                hours: "Mon-Sat: 10AM-9PM | Sun: 11AM-7PM",
+                phone: "+05-241 6888",
+                lat: 4.5975,
+                lng: 101.0901
+            },
+            {
+                id: 4,
+                name: "FitnessYay Johor Bahru",
+                address: "Mid Valley Southkey, Level 2, Lot 215, Persiaran Southkey 1, 80150 Johor Bahru",
+                hours: "Mon-Sat: 10AM-9PM | Sun: 11AM-7PM",
+                phone: "+07-336 2888",
+                lat: 1.4927,
+                lng: 103.7414
+            },
+            {
+                id: 5,
+                name: "FitnessYay Kampar",
+                address: "Kampar Putra Mall, Ground Floor, Lot G12, Jalan Universiti, 31900 Kampar",
+                hours: "Mon-Sat: 10AM-8PM | Sun: 11AM-6PM",
+                phone: "+05-466 8888",
+                lat: 4.3250,
+                lng: 101.1426
+            }
+        ];
+
+        // Show loading animation
+        function showLoading() {
+            $('#loading').show();
+        }
+
+        // Hide loading animation
+        function hideLoading() {
+            $('#loading').hide();
+        }
+
+        // Clear all markers from map
+        function clearMap() {
+            map.eachLayer(layer => {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+            $('#stores-container').empty();
+            $('#api-response').text('// Map cleared');
+        }
+
+        // Display stores on the map
+        function displayStores(storesData) {
+            clearMap();
+
+            // Add markers for each store
+            storesData.forEach(store => {
+                const marker = L.marker([store.lat, store.lng], { icon: storeIcon })
+                    .addTo(map)
+                    .bindPopup(`
+                        <strong>${store.name}</strong><br>
+                        ${store.address}<br>
+                        <i class="fas fa-phone"></i> ${store.phone}
+                    `);
+
+                // Add to stores list
+                $('#stores-container').append(`
+                    <div class="store-item" data-id="${store.id}">
+                        <h3>${store.name}</h3>
+                        <p class="store-address">${store.address}</p>
+                        <p class="store-hours">${store.hours}</p>
+                        <p class="store-phone"><i class="fas fa-phone"></i> ${store.phone}</p>
+                    </div>
+                `);
+            });
+
+            // Fit map to show all markers
+            const group = new L.featureGroup(storesData.map(store =>
+                L.marker([store.lat, store.lng])
+            ));
+            map.fitBounds(group.getBounds().pad(0.1));
+
+            // Update API response display
+            $('#api-response').text(`Fetched ${storesData.length} stores from API\n\n${JSON.stringify(storesData, null, 2)}`);
+        }
+
+        // Display users on the map (example of different data)
+        function displayUsers(usersData) {
+            clearMap();
+
+            // Add markers for each user
+            usersData.slice(0, 10).forEach(user => {
+                // Generate random coordinates for demonstration
+                const randomLat = 3.0 + Math.random() * 4.0;
+                const randomLng = 100.0 + Math.random() * 6.0;
+
+                const marker = L.marker([randomLat, randomLng], { icon: userIcon })
+                    .addTo(map)
+                    .bindPopup(`
+                        <strong>${user.name}</strong><br>
+                        <i class="fas fa-envelope"></i> ${user.email}<br>
+                        <i class="fas fa-building"></i> ${user.company.name}
+                    `);
+
+                // Add to stores list
+                $('#stores-container').append(`
+                    <div class="store-item" data-id="${user.id}">
+                        <h3>${user.name}</h3>
+                        <p><i class="fas fa-envelope"></i> ${user.email}</p>
+                        <p><i class="fas fa-building"></i> ${user.company.name}</p>
+                    </div>
+                `);
+            });
+
+            // Update API response display
+            $('#api-response').text(`Fetched ${usersData.length} users from API\n\nDisplaying 10 random users on map`);
+        }
+
+        // Fetch data from API
+        function fetchData() {
+            showLoading();
+            const apiType = $('#api-select').val();
+
+            if (apiType === 'stores') {
+                setTimeout(() => {
+                    displayStores(stores);
+                    hideLoading();
+                }, 1500);
+            } else if (apiType === 'users') {
+                // Fetch user data from JSONPlaceholder API
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/users',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        displayUsers(data);
+                        hideLoading();
+                    },
+                    error: function (xhr, status, error) {
+                        $('#api-response').text('Error fetching user data: ' + error);
+                        hideLoading();
+                    }
+                });
+            }
+        }
+
+        // Set up event handlers
+        $(document).ready(function () {
+            $('#fetch-btn').click(fetchData);
+            $('#clear-btn').click(clearMap);
+
+            // Search functionality
+            $('#store-search').on('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                $('.store-item').each(function () {
+                    const storeName = $(this).find('h3').text().toLowerCase();
+                    const storeAddress = $(this).find('.store-address').text().toLowerCase();
+
+                    if (storeName.includes(searchTerm) || storeAddress.includes(searchTerm)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+
+            // Initial map view
+            clearMap();
+        });
+    </script>
+</body>
+
+</html>

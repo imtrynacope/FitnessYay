@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FitnessYay — Log in</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <main class="wrap" role="main" aria-labelledby="login-heading">
+    <section class="panel-left" aria-hidden="true">
+      <a href="index.html">
+        <h1>FitnessYay</h1>
+      </a>
+      <p><strong>Track calories, connect with friends, and reach your fitness goals.</strong></p>
+    </section>
+
+    <section class="panel-right">
+      <div class="form-container">
+        <h2 id="login-heading">Log in to FitnessYay</h2>
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" type="email" placeholder="you@example.com" required>
+          </div>
+          <div class="field pw-wrap">
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="••••••••" required minlength="6">
+            <button type="button" id="pwToggle">Show</button>
+          </div>
+          <button type="submit" class="btn btn-primary">Log in</button>
+        </form>
+        <p class="signup-note">Don't have an account? <a href="signup.html">Sign in</a></p>
+        <nav class="links" aria-label="Footer links">
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="small" style="text-align:center; margin-top:8px">© <span id="year"></span> FitnessYay</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Show dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Password toggle functionality
+    $('#pwToggle').click(function () {
+      const pw = $('#password');
+      const type = pw.attr('type') === 'password' ? 'text' : 'password';
+      pw.attr('type', type);
+      $(this).text(type === 'password' ? 'Show' : 'Hide');
+    });
+
+    // Helper to read cookie by name
+    function getCookie(name) {
+      const nameEQ = name + '=';
+      const ca = document.cookie.split(';');
+      for (let c of ca.map(c => c.trim())) {
+        if (c.startsWith(nameEQ)) {
+          return decodeURIComponent(c.substring(nameEQ.length));
+        }
+      }
+      return null;
+    }
+
+    // Helper to parse user cookie
+    function parseUser(index) {
+      const raw = getCookie(`user_${index}`);
+      if (!raw) return null;
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return null;
+      }
+    }
+
+    $('#loginForm').submit(function (event) {
+      event.preventDefault();
+      const email = $('#email').val().trim().toLowerCase();
+      const pass = $('#password').val();
+
+      // Find number of registered users
+      const count = parseInt(getCookie('user_count')) || 0;
+      if (!count) {
+        alert('No user found. Please sign up.');
+        return window.location.href = 'signup.html';
+      }
+
+      // Validate credentials and record index
+      let foundIndex = null;
+      for (let i = 1; i <= count; i++) {
+        const u = parseUser(i);
+        if (u && u.email.toLowerCase() === email && u.password === pass) {
+          foundIndex = i;
+          break;
+        }
+      }
+
+      if (foundIndex !== null) {
+        // mark logged in for this session
+        sessionStorage.setItem('fitnessYayLoggedIn', 'true');
+        sessionStorage.setItem('fitnessYayCurrentUserIndex', foundIndex.toString());
+        // optionally store last login email cookie for convenience
+        document.cookie = "last_login_email=" + encodeURIComponent(email) + "; path=/";
+        alert('Login successful!');
+        window.location.href = 'index.html';
+      } else {
+        alert('Invalid email or password.');
+      }
+    });
+
+    // Prefill email field if last_login_email is available
+    $(function () {
+      const last = (function getCookieRaw(n) {
+        const nameEQ = n + '=';
+        const ca = document.cookie.split(';');
+        for (let c of ca.map(c => c.trim())) {
+          if (c.startsWith(nameEQ)) {
+            return decodeURIComponent(c.substring(nameEQ.length));
+          }
+        }
+        return null;
+      })('last_login_email');
+      if (last) $('#email').val(last);
+    });
+  </script>
+</body>
+
+</html>

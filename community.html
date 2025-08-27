@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitnessYay - Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="community.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat"></i> FitnessYay
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="product.html">Products</a>
+                <a href="announcements.html">Announcements</a>
+                <a href="store-locator.html">Store Locator</a>
+                <a href="feedback.html">Feedback</a>
+                <a href="blog.html">Blog</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="community.html" class="active">Community</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="wishlist.html"><i class="fas fa-heart"></i></a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                <a href="login.html" class="cta">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>FitnessYay Community</h1>
+        <p>Connect with other fitness enthusiasts, share your progress, and get inspired</p>
+    </section>
+
+    <!-- Community Content -->
+    <div class="community-container">
+        <!-- Sidebar -->
+        <div class="community-sidebar">
+            <h2>Community Stats</h2>
+            <div class="community-stats">
+                <div class="stat-item">
+                    <div class="stat-number">5,281</div>
+                    <div class="stat-label">Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1,204</div>
+                    <div class="stat-label">Online</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12,587</div>
+                    <div class="stat-label">Posts</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">45,962</div>
+                    <div class="stat-label">Comments</div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Popular Topics</h3>
+                <ul class="topics-list">
+                    <li><a href="#">Workout Routines <span>1.2k</span></a></li>
+                    <li><a href="#">Nutrition Advice <span>982</span></a></li>
+                    <li><a href="#">Progress Photos <span>845</span></a></li>
+                    <li><a href="#">Product Reviews <span>723</span></a></li>
+                    <li><a href="#">Recovery Tips <span>654</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Community Events</h3>
+                <ul class="topics-list">
+                    <li><a href="#">Virtual 5K Challenge <span>Jun 25</span></a></li>
+                    <li><a href="#">Live Q&A with Trainers <span>Jul 2</span></a></li>
+                    <li><a href="#">Nutrition Workshop <span>Jul 10</span></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="community-main">
+            <!-- Create Post (visible when logged in) -->
+            <div class="create-post" id="create-post">
+                <h2>Create a Post</h2>
+                <div class="post-form">
+                    <textarea placeholder="Share your fitness journey, ask a question, or post an update..."></textarea>
+                    <div class="post-actions">
+                        <div class="post-tags">
+                            <div class="tag">Question</div>
+                            <div class="tag">Progress</div>
+                            <div class="tag">Advice</div>
+                            <div class="tag">Review</div>
+                        </div>
+                        <button class="post-button">Post</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Prompt (visible when not logged in) -->
+            <div class="login-prompt" id="login-prompt">
+                <i class="fas fa-lock"></i>
+                <h3>Join the Conversation</h3>
+                <p>Login to participate in the community, share your progress, and connect with other fitness
+                    enthusiasts.</p>
+                <div class="auth-buttons">
+                    <a href="login.html" class="auth-button primary">Login</a>
+                    <a href="signup.html" class="auth-button secondary">Create Account</a>
+                </div>
+            </div>
+
+            <!-- Posts -->
+            <div class="posts-container">
+                <!-- Post 1 -->
+                <div class="post">
+                    <div class="post-header">
+                        <div class="user-avatar">JS</div>
+                        <div class="user-info">
+                            <h3>John Smith</h3>
+                            <div class="post-meta">Posted 3 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Just hit my personal best for deadlifts today! 🎉 180kg after 6 months of training. The
+                            FitnessYay watch helped me track my progress and optimize my recovery. Who else is
+                            celebrating fitness milestones this week?</p>
+                    </div>
+                    <div class="post-tags">
+                        <div class="tag active">Progress</div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-action">
+                            <i class="fas fa-heart"></i> <span>124</span>
+                        </div>
+                        <div class="post-action">
+                            <i class="fas fa-comment"></i> <span>23</span>
+                        </div>
+                        <div class="post-action">
+                            <i class="fas fa-share"></i> <span>Share</span>
+                        </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="comments">
+                        <div class="comment">
+                            <div class="comment-avatar">SD</div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <span class="comment-author">Sarah Davis</span>
+                                    <span class="comment-time">2 hours ago</span>
+                                </div>
+                                <p>That's amazing progress, John! How often do you train deadlifts?</p>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-avatar">MR</div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <span class="comment-author">Mike Rodriguez</span>
+                                    <span class="comment-time">1 hour ago</span>
+                                </div>
+                                <p>Congratulations! I just hit 150kg last week. Hope to reach your numbers soon 💪</p>
+                            </div>
+                        </div>
+                        <div class="add-comment">
+                            <input type="text" placeholder="Add a comment...">
+                            <button class="comment-button">Comment</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 2 -->
+                <div class="post">
+                    <div class="post-header">
+                        <div class="user-avatar">ED</div>
+                        <div class="user-info">
+                            <h3>Emma Davis</h3>
+                            <div class="post-meta">Posted 1 day ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Does anyone have recommendations for good pre-workout meals? I've been struggling with energy
+                            during my afternoon workouts. I usually train at 5pm after work.</p>
+                    </div>
+                    <div class="post-tags">
+                        <div class="tag active">Question</div>
+                        <div class="tag active">Nutrition</div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-action">
+                            <i class="fas fa-heart"></i> <span>87</span>
+                        </div>
+                        <div class="post-action">
+                            <i class="fas fa-comment"></i> <span>31</span>
+                        </div>
+                        <div class="post-action">
+                            <i class="fas fa-share"></i> <span>Share</span>
+                        </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="comments">
+                        <div class="comment">
+                            <div class="comment-avatar">TP</div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <span class="comment-author">Thomas Park</span>
+                                    <span class="comment-time">20 hours ago</span>
+                                </div>
+                                <p>I usually have a banana with almond butter about 45 minutes before my workout. Gives
+                                    me sustained energy without feeling too full!</p>
+                            </div>
+                        </div>
+                        <div class="add-comment">
+                            <input type="text" placeholder="Add a comment...">
+                            <button class="comment-button">Comment</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Post 3 -->
+                <div class="post">
+                    <div class="post-header">
+                        <div class="user-avatar">FL</div>
+                        <div class="user-info">
+                            <h3>Fatima Lee</h3>
+                            <div class="post-meta">Posted 2 days ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>Just completed my first month with the FitnessYay Ultra Charge 5 and I'm absolutely loving
+                            it! The sleep tracking features have completely changed my recovery routine. The battery
+                            life is impressive too - only needed to charge twice in 30 days.</p>
+                        <p>Would highly recommend if you're looking for a fitness tracker that focuses on recovery as
+                            much as activity.</p>
+                    </div>
+                    <div class="post-tags">
+                        <div class="tag active">Review</div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-action">
+                            <i class="fas fa-heart"></i> <span>142</span>
+                        </div>
+                        <div class="post-action">
+                            <i class="fas fa-comment"></i> <span>45</span>
+                        </div>
+                        <div class="post-action">
+                            <i class="fas fa-share"></i> <span>Share</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>FitnessYay</h3>
+                <p>Advanced fitness technology designed to help you understand your body and optimize your performance.
+                </p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Products</h3>
+                <ul>
+                    <li><a href="product.html">Smartwatches</a></li>
+                    <li><a href="app.html">Mobile App</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 FitnessYay. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function isLoggedIn() {
+            return sessionStorage.getItem('fitnessYayLoggedIn') === 'true';
+        }
+
+        function updateLoginButton() {
+            const loginBtn = document.querySelector('.nav-actions .cta');
+            if (!loginBtn) return;
+
+            if (isLoggedIn()) {
+                loginBtn.textContent = "Logout";
+                loginBtn.href = "#"; // prevent redirect
+                loginBtn.onclick = function (e) {
+                    e.preventDefault();
+                    sessionStorage.removeItem('fitnessYayLoggedIn');
+                    alert("You have been logged out.");
+                    window.location.reload(); // reload to update nav
+                };
+            } else {
+                loginBtn.textContent = "Login";
+                loginBtn.href = "login.html";
+                loginBtn.onclick = null;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", updateLoginButton);
+
+
+        // DOM elements
+        const createPost = document.getElementById('create-post');
+        const loginPrompt = document.getElementById('login-prompt');
+
+        // Update UI based on login status
+        function updateUI() {
+            if (isLoggedIn) {
+                createPost.style.display = 'block';
+                loginPrompt.style.display = 'none';
+            } else {
+                createPost.style.display = 'none';
+                loginPrompt.style.display = 'block';
+            }
+        }
+
+        // Like functionality
+        document.querySelectorAll('.post-action').forEach(action => {
+            action.addEventListener('click', function () {
+                if (!isLoggedIn) {
+                    // Redirect to login page if not logged in
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                if (this.querySelector('i').classList.contains('fa-heart')) {
+                    this.classList.toggle('active');
+                    const count = this.querySelector('span');
+                    if (this.classList.contains('active')) {
+                        count.textContent = parseInt(count.textContent) + 1;
+                    } else {
+                        count.textContent = parseInt(count.textContent) - 1;
+                    }
+                }
+            });
+        });
+
+        // Comment functionality
+        document.querySelectorAll('.comment-button').forEach(button => {
+            button.addEventListener('click', function () {
+                if (!isLoggedIn) {
+                    // Redirect to login page if not logged in
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                const input = this.previousElementSibling;
+                const commentText = input.value.trim();
+
+                if (commentText) {
+                    const commentsContainer = this.closest('.comments');
+                    const newComment = document.createElement('div');
+                    newComment.className = 'comment';
+                    newComment.innerHTML = `
+                        <div class="comment-avatar">Y</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-author">You</span>
+                                <span class="comment-time">Just now</span>
+                            </div>
+                            <p>${commentText}</p>
+                        </div>
+                    `;
+
+                    commentsContainer.insertBefore(newComment, this.parentElement);
+                    input.value = '';
+
+                    // Update comment count
+                    const commentCount = this.closest('.post').querySelector('.fa-comment').nextElementSibling;
+                    commentCount.textContent = parseInt(commentCount.textContent) + 1;
+                }
+            });
+        });
+
+        // Post creation
+        document.querySelector('.post-button').addEventListener('click', function () {
+            if (!isLoggedIn) {
+                // Redirect to login page if not logged in
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const textarea = document.querySelector('.post-form textarea');
+            const postText = textarea.value.trim();
+
+            if (postText) {
+                const postsContainer = document.querySelector('.posts-container');
+
+            // Create post element
+            const newPost = document.createElement('div');
+            newPost.className = 'post';
+            newPost.innerHTML = `
+            <div class="post-header">
+                <div class="user-avatar">Y</div>
+                <div class="user-info">
+                <h3>You</h3>
+                <div class="post-meta">Just now</div>
+                </div>
+            </div>
+            <div class="post-content">
+                <p>${postText}</p>
+            </div>
+            <div class="post-tags">
+                <div class="tag active">New</div>
+            </div>
+            <div class="post-footer">
+                <div class="post-action"><i class="fas fa-heart"></i> <span>0</span></div>
+                <div class="post-action"><i class="fas fa-comment"></i> <span>0</span></div>
+                <div class="post-action"><i class="fas fa-share"></i> <span>Share</span></div>
+            </div>
+            `;
+
+            // Prepend post to top of list
+            postsContainer.insertBefore(newPost, postsContainer.firstChild);
+
+            // Clear textarea
+            textarea.value = '';    
+            }
+        });
+
+        // Initialize UI
+        updateUI();
+    </script>
+</body>
+
+</html>

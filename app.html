@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitnessYay App - Your Personal Health Companion</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-heartbeat"></i> FitnessYay
+      </a>
+      
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="product.html">Products</a>
+        <a href="announcements.html">Announcements</a>
+        <a href="store-locator.html">Store Locator</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="blog.html">Blog</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="community.html">Community</a>
+      </div>
+      
+      <div class="nav-actions">
+        <a href="wishlist.html"><i class="fas fa-heart"></i></a>
+        <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+        <a href="login.html" class="cta">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="app-hero">
+    <div class="app-hero-content">
+      <h1>FitnessYay App</h1>
+      <p>Your personal health companion that connects with all FitnessYay devices to provide insights, motivation, and results.</p>
+      <div class="app-download-buttons">
+        <a href="#" class="download-btn">
+          <i class="fab fa-apple fa-2x"></i>
+          <div>
+            <div style="font-size: 0.8rem;">Download on the</div>
+            <div>App Store</div>
+          </div>
+        </a>
+        <a href="#" class="download-btn">
+          <i class="fab fa-google-play fa-2x"></i>
+          <div>
+            <div style="font-size: 0.8rem;">Get it on</div>
+            <div>Google Play</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="app-features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-bed"></i>
+          </div>
+          <h3><i class="fas fa-bed"></i> Improve Sleep Quality</h3>
+          <p>Track your sleep patterns, get personalized recommendations, and wake up feeling refreshed.</p>
+          <div class="hidden-content">
+            <p>Our advanced sleep tracking analyzes your sleep stages and provides insights to help you establish better sleep habits for improved recovery and performance.</p>
+          </div>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-walking"></i>
+          </div>
+          <h3><i class="fas fa-walking"></i> Build Healthier Habits</h3>
+          <p>Set goals, track progress, and stay motivated with personalized challenges and reminders.</p>
+          <div class="hidden-content">
+            <p>Create custom habit routines, receive timely notifications, and celebrate milestones as you build sustainable healthy habits.</p>
+          </div>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-apple-alt"></i>
+          </div>
+          <h3><i class="fas fa-apple-alt"></i> Nutrition Tracking</h3>
+          <p>Log meals, count calories, and get nutritional insights to support your fitness goals.</p>
+          <div class="hidden-content">
+            <p>Our extensive food database and barcode scanner make it easy to track your nutrition and maintain a balanced diet.</p>
+          </div>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-lungs"></i>
+          </div>
+          <h3><i class="fas fa-lungs"></i> Health Monitoring</h3>
+          <p>Track blood oxygen, heart rate, and other vital signs for comprehensive health insights.</p>
+          <div class="hidden-content">
+            <p>Monitor key health metrics over time, set alerts for unusual readings, and share reports with your healthcare provider.</p>
+          </div>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3><i class="fas fa-heart"></i> Heart Rate Analytics</h3>
+          <p>24/7 heart rate monitoring with detailed reports and personalized health insights.</p>
+          <div class="hidden-content">
+            <p>Track your resting heart rate, workout intensity, and recovery metrics to optimize your training and overall cardiovascular health.</p>
+          </div>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3><i class="fas fa-chart-line"></i> Progress Tracking</h3>
+          <p>Visualize your fitness journey with detailed charts and progress reports.</p>
+          <div class="hidden-content">
+            <p>See how far you've come with customizable charts, achievement badges, and shareable progress reports to stay motivated.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Showcase Section -->
+  <section class="app-showcase">
+    <div class="app-showcase-content">
+      <h2>Experience the FitnessYay App</h2>
+      <div class="app-screens">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="App Dashboard" class="app-screen">
+        <img src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Workout Tracking" class="app-screen">
+        <img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sleep Analysis" class="app-screen">
+      </div>
+      <a href="product.html" class="back-button">
+        <i class="fas fa-arrow-left"></i> Back to Products
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>FitnessYay</h3>
+        <p>Advanced fitness technology designed to help you understand your body and optimize your performance.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h3>Products</h3>
+        <ul>
+          <li><a href="product.html">Smartwatches</a></li>
+          <li><a href="product.html">Smart Scales</a></li>
+          <li><a href="product.html">Wireless Earbuds</a></li>
+          <li><a href="product.html">Accessories</a></li>
+          <li><a href="app.html">Mobile App</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="community.html">Community</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>Copyright &copy; 2025 FitnessYay. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <script>
+
+     function isLoggedIn() {
+      return sessionStorage.getItem('fitnessYayLoggedIn') === 'true';
+    }
+
+    function updateLoginButton() {
+      const loginBtn = document.querySelector('.nav-actions .cta');
+      if (!loginBtn) return;
+
+      if (isLoggedIn()) {
+        loginBtn.textContent = "Logout";
+        loginBtn.href = "#"; // prevent redirect
+        loginBtn.onclick = function (e) {
+          e.preventDefault();
+          sessionStorage.removeItem('fitnessYayLoggedIn');
+          alert("You have been logged out.");
+          window.location.reload(); // reload to update nav
+        };
+      } else {
+        loginBtn.textContent = "Login";
+        loginBtn.href = "login.html";
+        loginBtn.onclick = null;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", updateLoginButton);
+    
+    // Add stagger animation to sections
+    $(document).ready(function() {
+      $('.feature-card').each(function(index) {
+        $(this).css('animation-delay', (index * 0.2) + 's');
+      });
+      
+      // Toggle hidden content on click
+      $('.feature-card').on('click', function() {
+        $(this).toggleClass('active');
+      });
+    });
+
+    // Smooth scroll for navigation links
+    $('a[href^="#"]').on('click', function(e) {
+      e.preventDefault();
+      const target = $(this.hash);
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top - 100
+        }, 500);
+      }
+    });
+  </script>
+</body>
+
+</html>
+      <div class="footer-col">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="community.html">Community</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>Copyright &copy; 2025 FitnessYay. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Add stagger animation to sections
+    $(document).ready(function() {
+      $('.section').each(function(index) {
+        $(this).css('animation-delay', (index * 0.2) + 's');
+      });
+    });
+
+    // Smooth scroll for navigation links
+    $('a[href^="#"]').on('click', function(e) {
+      e.preventDefault();
+      const target = $(this.hash);
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top - 100
+        }, 500);
+      }
+    });
+  </script>
+</body>
+
+</html>
