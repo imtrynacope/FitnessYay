@@ -1,16 +1,15 @@
 :root {
-    --bg-image: url('pngtree-fitness-app-tracker-rate-running-trendy-photo-picture-image_8956842.jpg');
-    /* same background for all */
-    --accent: #0066ee;
-    --muted: #6b7280;
-    --card-bg: rgba(255, 255, 255, 0.92);
-    --max-width: 960px;
-    --radius: 12px;
+  --bg-image: url('pngtree-fitness-app-tracker-rate-running-trendy-photo-picture-image_8956842.jpg');
+  --accent: #0066ee;
+  --muted: #6b7280;
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --max-width: 960px;
+  --radius: 12px;
 }
 
 /* Reset / base */
 * {
-    box-sizing: border-box;
+    box-sizing: border-box;   
 }
 
 html,
@@ -72,6 +71,11 @@ body {
     background: linear-gradient(135deg, rgba(25, 26, 27, 0.92), rgba(92, 99, 95, 0.6));
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     z-index: 2;
+}
+@media (max-width: 899px) {
+    .panel-left {
+        display: none;
+    }
 }
 
 /* right content/form panel */
