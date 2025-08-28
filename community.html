@@ -312,65 +312,60 @@
     </footer>
 
     <script>
-        function isLoggedIn() {
-            return sessionStorage.getItem('fitnessYayLoggedIn') === 'true';
+    function isLoggedIn() {
+        return sessionStorage.getItem('fitnessYayLoggedIn') === 'true';
+    }
+
+    function updateLoginButton() {
+        const loginBtn = document.querySelector('.nav-actions .cta');
+        if (!loginBtn) return;
+
+        if (isLoggedIn()) {
+            loginBtn.textContent = "Logout";
+            loginBtn.href = "#";
+            loginBtn.onclick = function (e) {
+                e.preventDefault();
+                sessionStorage.removeItem('fitnessYayLoggedIn');
+                alert("You have been logged out.");
+                window.location.reload();
+            };
+        } else {
+            loginBtn.textContent = "Login";
+            loginBtn.href = "login.html";
+            loginBtn.onclick = null;
         }
+    }
 
-        function updateLoginButton() {
-            const loginBtn = document.querySelector('.nav-actions .cta');
-            if (!loginBtn) return;
-
-            if (isLoggedIn()) {
-                loginBtn.textContent = "Logout";
-                loginBtn.href = "#"; // prevent redirect
-                loginBtn.onclick = function (e) {
-                    e.preventDefault();
-                    sessionStorage.removeItem('fitnessYayLoggedIn');
-                    alert("You have been logged out.");
-                    window.location.reload(); // reload to update nav
-                };
-            } else {
-                loginBtn.textContent = "Login";
-                loginBtn.href = "login.html";
-                loginBtn.onclick = null;
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", updateLoginButton);
-
-
-        // DOM elements
+    function updateUI() {
         const createPost = document.getElementById('create-post');
         const loginPrompt = document.getElementById('login-prompt');
 
-        // Update UI based on login status
-        function updateUI() {
-            if (isLoggedIn) {
-                createPost.style.display = 'block';
-                loginPrompt.style.display = 'none';
-            } else {
-                createPost.style.display = 'none';
-                loginPrompt.style.display = 'block';
-            }
+        if (isLoggedIn()) {
+            createPost.style.display = 'block';
+            loginPrompt.style.display = 'none';
+        } else {
+            createPost.style.display = 'none';
+            loginPrompt.style.display = 'block';
         }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        updateLoginButton();
+        updateUI();
 
         // Like functionality
         document.querySelectorAll('.post-action').forEach(action => {
             action.addEventListener('click', function () {
-                if (!isLoggedIn) {
-                    // Redirect to login page if not logged in
+                if (!isLoggedIn()) {
                     window.location.href = 'login.html';
                     return;
                 }
-
                 if (this.querySelector('i').classList.contains('fa-heart')) {
                     this.classList.toggle('active');
                     const count = this.querySelector('span');
-                    if (this.classList.contains('active')) {
-                        count.textContent = parseInt(count.textContent) + 1;
-                    } else {
-                        count.textContent = parseInt(count.textContent) - 1;
-                    }
+                    count.textContent = this.classList.contains('active')
+                        ? parseInt(count.textContent) + 1
+                        : parseInt(count.textContent) - 1;
                 }
             });
         });
@@ -378,8 +373,7 @@
         // Comment functionality
         document.querySelectorAll('.comment-button').forEach(button => {
             button.addEventListener('click', function () {
-                if (!isLoggedIn) {
-                    // Redirect to login page if not logged in
+                if (!isLoggedIn()) {
                     window.location.href = 'login.html';
                     return;
                 }
@@ -401,7 +395,6 @@
                             <p>${commentText}</p>
                         </div>
                     `;
-
                     commentsContainer.insertBefore(newComment, this.parentElement);
                     input.value = '';
 
@@ -414,8 +407,7 @@
 
         // Post creation
         document.querySelector('.post-button').addEventListener('click', function () {
-            if (!isLoggedIn) {
-                // Redirect to login page if not logged in
+            if (!isLoggedIn()) {
                 window.location.href = 'login.html';
                 return;
             }
@@ -426,41 +418,36 @@
             if (postText) {
                 const postsContainer = document.querySelector('.posts-container');
 
-            // Create post element
-            const newPost = document.createElement('div');
-            newPost.className = 'post';
-            newPost.innerHTML = `
-            <div class="post-header">
-                <div class="user-avatar">Y</div>
-                <div class="user-info">
-                <h3>You</h3>
-                <div class="post-meta">Just now</div>
-                </div>
-            </div>
-            <div class="post-content">
-                <p>${postText}</p>
-            </div>
-            <div class="post-tags">
-                <div class="tag active">New</div>
-            </div>
-            <div class="post-footer">
-                <div class="post-action"><i class="fas fa-heart"></i> <span>0</span></div>
-                <div class="post-action"><i class="fas fa-comment"></i> <span>0</span></div>
-                <div class="post-action"><i class="fas fa-share"></i> <span>Share</span></div>
-            </div>
-            `;
+                const newPost = document.createElement('div');
+                newPost.className = 'post';
+                newPost.innerHTML = `
+                    <div class="post-header">
+                        <div class="user-avatar">Y</div>
+                        <div class="user-info">
+                            <h3>You</h3>
+                            <div class="post-meta">Just now</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>${postText}</p>
+                    </div>
+                    <div class="post-tags">
+                        <div class="tag active">New</div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-action"><i class="fas fa-heart"></i> <span>0</span></div>
+                        <div class="post-action"><i class="fas fa-comment"></i> <span>0</span></div>
+                        <div class="post-action"><i class="fas fa-share"></i> <span>Share</span></div>
+                    </div>
+                `;
 
-            // Prepend post to top of list
-            postsContainer.insertBefore(newPost, postsContainer.firstChild);
-
-            // Clear textarea
-            textarea.value = '';    
+                postsContainer.insertBefore(newPost, postsContainer.firstChild);
+                textarea.value = '';
             }
         });
+    });
+</script>
 
-        // Initialize UI
-        updateUI();
-    </script>
 </body>
 
 </html>
